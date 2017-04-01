@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using System.Collections.Generic;
+using System.Numerics;
 
 namespace Wiggydave10.Utilities
 {
@@ -6,11 +7,33 @@ namespace Wiggydave10.Utilities
     {
         public static BigInteger Power(int number, int toPower)
         {
-            var result = new BigInteger();
-            for (var i = 0; i < toPower; i++)
+            var result = new BigInteger(number);
+            for (var i = 1; i < toPower; i++)
                 result = result * number;
 
             return result;
+        }
+
+        public static IEnumerable<int> GetDigits(int integer)
+        {
+            var list = new List<int>();
+            while (integer > 0)
+            {
+                list.Add((integer % 10));
+                integer = integer / 10;
+            }
+            return list;
+        }
+
+        public static IEnumerable<int> GetDigits(this BigInteger integer)
+        {
+            var list = new List<int>();
+            while (!integer.IsZero)
+            {
+                list.Add((int)(integer % 10));
+                integer = integer / 10;
+            }
+            return list;
         }
     }
 }
