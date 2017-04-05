@@ -35,5 +35,15 @@ namespace Wiggydave10.Utilities
             }
             return list;
         }
+
+        public static int GetTriangleNumber(int index)
+        {
+            var answer = 0;
+            for (var i = 1; i <= index; i++)
+            {
+                answer = answer + i;
+            }
+            return answer;
+        }
     }
 }
