@@ -14,7 +14,7 @@ namespace Wiggydave10.Utilities
             return result;
         }
 
-        public static IEnumerable<int> GetDigits(int integer)
+        public static IEnumerable<int> GetDigits(this int integer)
         {
             var list = new List<int>();
             while (integer > 0)
@@ -44,6 +44,22 @@ namespace Wiggydave10.Utilities
                 answer = answer + i;
             }
             return answer;
+        }
+
+        public static int Factorial(int number)
+        {
+            if (number == 0)
+                return 1;
+
+            return number * Factorial(number-1);
+        }
+
+        public static BigInteger Factorial(BigInteger number)
+        {
+            if (number == 0)
+                return 1;
+
+            return number * Factorial(number - 1);
         }
     }
 }
