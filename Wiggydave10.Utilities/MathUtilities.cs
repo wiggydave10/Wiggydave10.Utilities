@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
 
 namespace Wiggydave10.Utilities
@@ -60,6 +62,29 @@ namespace Wiggydave10.Utilities
                 return 1;
 
             return number * Factorial(number - 1);
+        }
+
+        public static IEnumerable<int> GetDivisors(int number)
+        {
+            IList<int> result = new List<int>();
+            var squareRoot = Math.Sqrt(number);
+            for (var i = 1; i < Math.Truncate(squareRoot); i++)
+            {
+                if (number % i != 0)
+                    continue;
+
+                result.Add(i);
+                result.Add(number / i);
+            }
+            return result;
+        }
+
+        public static IEnumerable<int> GetDivisors(int number, bool includeNumber)
+        {
+            var result = GetDivisors(number);
+            if (!includeNumber)
+                result = result.Where(x => x != number);
+            return result;
         }
     }
 }
