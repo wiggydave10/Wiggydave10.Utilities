@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace Wiggydave10.Utilities
@@ -78,6 +80,16 @@ namespace Wiggydave10.Utilities
             }
                 
             return null;
+        }
+
+        public static int GetTotalAlphabeticalValue(this string text)
+        {
+            return text.GetAlphabeticalValue().Sum();
+        }
+
+        public static IEnumerable<int> GetAlphabeticalValue(this string text)
+        {
+            return text.ToUpper().ToCharArray().Select(x => x - 64);
         }
     }
 }
