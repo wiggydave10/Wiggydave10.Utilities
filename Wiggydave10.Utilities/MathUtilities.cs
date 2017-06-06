@@ -68,7 +68,7 @@ namespace Wiggydave10.Utilities
         {
             IList<int> result = new List<int>();
             var squareRoot = Math.Sqrt(number);
-            for (var i = 1; i < Math.Truncate(squareRoot); i++)
+            for (var i = 1; i <= Math.Truncate(squareRoot); i++)
             {
                 if (number % i != 0)
                     continue;
@@ -76,7 +76,7 @@ namespace Wiggydave10.Utilities
                 result.Add(i);
                 result.Add(number / i);
             }
-            return result;
+            return result.Distinct().OrderBy(x => x);
         }
 
         public static IEnumerable<int> GetDivisors(int number, bool includeNumber)
@@ -85,6 +85,21 @@ namespace Wiggydave10.Utilities
             if (!includeNumber)
                 result = result.Where(x => x != number);
             return result;
+        }
+
+        public static bool IsPerfect(this int number)
+        {
+            return MathUtilities.GetDivisors(number, false).Sum() == number;
+        }
+
+        public static bool IsDeficient(this int number)
+        {
+            return MathUtilities.GetDivisors(number, false).Sum() < number;
+        }
+
+        public static bool IsAbundent(this int number)
+        {
+            return MathUtilities.GetDivisors(number, false).Sum() > number;
         }
     }
 }
