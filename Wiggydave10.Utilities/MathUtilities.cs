@@ -7,6 +7,9 @@ namespace Wiggydave10.Utilities
 {
     public static class MathUtilities
     {
+        public static bool IsEven(int number) => number % 2 == 0;
+        public static bool IsOdd(int number) => number % 2 != 0;
+
         public static BigInteger Power(int number, int toPower)
         {
             var result = new BigInteger(number);
@@ -100,6 +103,24 @@ namespace Wiggydave10.Utilities
         public static bool IsAbundent(this int number)
         {
             return MathUtilities.GetDivisors(number, false).Sum() > number;
+        }
+
+        public static bool IsPrime(int number)
+        {
+            var isOdd = IsOdd(number);
+            if (number == 2)
+                return true;
+            if (number == 1 || !isOdd)
+                return false;
+
+            var maxValue = Math.Floor(Math.Sqrt(number));
+
+            for (var i = 3; i <= maxValue; i += 2)
+            {
+                if (number % i == 0)
+                    return false;
+            }
+            return true;
         }
     }
 }
