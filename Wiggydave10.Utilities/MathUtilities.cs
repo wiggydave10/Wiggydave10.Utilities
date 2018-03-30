@@ -122,5 +122,57 @@ namespace Wiggydave10.Utilities
             }
             return true;
         }
+
+        public static int GetLowestCommonMultiple(params int[] numbers)
+        {
+            if (numbers.Length == 1)
+                return numbers[0];
+
+            var a = numbers[0];
+            var b = numbers[1];
+            if (numbers.Length > 2)
+                b = GetLowestCommonMultiple(numbers.Skip(1).ToArray());
+
+            return GetLowestCommonMultiple(a, b);
+        }
+        public static int GetLowestCommonMultiple(int a, int b)
+        {
+            var x = a > b ? a : b;
+            var y = a > b ? b : a;
+
+            for (var i = 1; i < y; i++)
+            {
+                if ((x * i) % y == 0)
+                    return i * x;
+            }
+            return x * y;
+        }
+
+
+        public static int GetGreatestCommonDivisor(params int[] numbers)
+        {
+            if (numbers.Length == 1)
+                return numbers[0];
+
+            var a = numbers[0];
+            var b = numbers[1];
+            if (numbers.Length > 2)
+                b = GetGreatestCommonDivisor(numbers.Skip(1).ToArray());
+
+            return GetGreatestCommonDivisor(a, b);
+        }
+        public static int GetGreatestCommonDivisor(int a, int b)
+        {
+            var x = a > b ? a : b;
+            var y = a > b ? b : a;
+            
+            while (x % y != 0)
+            {
+                var temp = x;
+                x = y;
+                y = temp % x;
+            }
+            return y;
+        }
     }
 }
