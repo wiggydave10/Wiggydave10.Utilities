@@ -27,6 +27,7 @@ namespace Wiggydave10.Utilities
                 list.Add((integer % 10));
                 integer = integer / 10;
             }
+            list.Reverse();
             return list;
         }
 
@@ -105,7 +106,7 @@ namespace Wiggydave10.Utilities
             return MathUtilities.GetDivisors(number, false).Sum() > number;
         }
 
-        public static bool IsPrime(int number)
+        public static bool IsPrime(this int number)
         {
             var isOdd = IsOdd(number);
             if (number == 2)
@@ -173,6 +174,58 @@ namespace Wiggydave10.Utilities
                 y = temp % x;
             }
             return y;
+        }
+
+        public static bool IsCircularPrime(this int number)
+        {
+            var digits = number.GetDigits();
+
+            if (digits.Count() == 1)
+                return digits.ElementAt(0).IsPrime();
+
+            var nums = GetNumberRotation(digits);
+            var isPrime = true;
+            foreach (var num in nums)
+            {
+                var intNum = int.Parse(num);
+                if (!intNum.IsPrime())
+                    isPrime = false;
+            }
+
+            return isPrime;
+        }
+
+        public static IEnumerable<string> GetNumbers(string number, IEnumerable<int> digits)
+        {
+            if (digits.Count() == 1)
+                return new []{ $"{number}{digits.ElementAt(0)}" };
+
+            var numbers = new List<string>();
+            for (var index = 0; index < digits.Count(); index++)
+            {
+                var digitList = digits?.ToList() ?? new List<int>();
+                var digit = digitList.ElementAt(index);
+                digitList.RemoveAt(index);
+                var numberCopy = $"{number}{digit}";
+
+                var numberAlternatives = GetNumbers(numberCopy, digitList);
+                numbers.AddRange(numberAlternatives);
+            }
+
+            return numbers;
+        }
+
+        public static IEnumerable<string> GetNumberRotation(IEnumerable<int> digits)
+        {
+            var queue = new Queue<string>(digits.Select(x => x.ToString()));
+            var results = new List<string>();
+            foreach (var item in digits)
+            {
+                results.Add(queue.Aggregate((a, b) => a + b));
+                queue.Dequeue();
+                queue.Enqueue(item.ToString());
+            }
+            return results;
         }
     }
 }
