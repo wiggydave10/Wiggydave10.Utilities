@@ -91,5 +91,25 @@ namespace Wiggydave10.Utilities
         {
             return text.ToUpper().ToCharArray().Select(x => x - 64);
         }
+
+        public static bool IsPalindrome(this string value)
+        {
+            var frontIndex = 0;
+            var endIndex = value.Length - 1;
+            while (true)
+            {
+                if (frontIndex > endIndex)
+                    return true;
+
+                var a = value[frontIndex];
+                var b = value[endIndex];
+
+                if (char.ToLower(a) != char.ToLower(b))
+                    return false;
+
+                frontIndex++;
+                endIndex--;
+            }
+        }
     }
 }

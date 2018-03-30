@@ -227,5 +227,15 @@ namespace Wiggydave10.Utilities
             }
             return results;
         }
+
+        public static string GetBinaryNumber(this int number)
+        {
+            return Convert.ToString(number, 2);
+        }
+
+        public static bool IsPalindrome(this int number)
+        {
+            return number.ToString().IsPalindrome();
+        }
     }
 }
