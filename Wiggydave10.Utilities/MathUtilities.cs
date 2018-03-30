@@ -237,5 +237,43 @@ namespace Wiggydave10.Utilities
         {
             return number.ToString().IsPalindrome();
         }
+
+        /// <summary>
+        /// Please don't use, unless you want to be dumb and waste time!
+        /// </summary>
+        /// <param name="maxNumber"></param>
+        /// <param name="includeMaxNum"></param>
+        /// <returns>List of primes, eventually!</returns>
+        public static IEnumerable<int> GetPrimes_VerySlow(int maxNumber, bool includeMaxNum = true)
+        {
+            var maxCount = includeMaxNum ? maxNumber : maxNumber - 1;
+            var numbers = Enumerable.Range(1, maxCount);
+            foreach (var number in numbers)
+            {
+                if (number.IsPrime())
+                    yield return number;
+            }
+        }
+        public static IEnumerable<int> GetPrimes(int maxNumber, bool includeMaxNum = true)
+        {
+            var maxCount = includeMaxNum ? maxNumber : maxNumber - 1;
+            var primes = new List<int> { 2 };
+            for (var index = 3; index < maxCount; index += 2)
+            {
+                var maxValue = Math.Floor(Math.Sqrt(index));
+                var isPrime = true;
+                for (int i = 0; primes[i] <= maxValue; i++)
+                {
+                    if (index % primes[i] == 0)
+                    {
+                        isPrime = false;
+                        break;
+                    }
+                }
+                if (isPrime)
+                    primes.Add(index);
+            }
+            return primes;
+        }
     }
 }
