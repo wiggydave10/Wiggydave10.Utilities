@@ -70,14 +70,7 @@ namespace Wiggydave10.Utilities.Useful_Classes
         public static bool IsPandigital(this ProductEquation productEq, int pandigital)
         {
             var str = productEq.GetString();
-            var numbers = Enumerable.Range(1, pandigital);
-
-            var distinctNumbers = str.ToCharArray().Distinct();
-            if (str.Length == pandigital && distinctNumbers.Count() == pandigital)
-            {
-                return numbers.All(number => str.Contains(number.ToString()));
-            }
-            return false;
+            return str.IsPandigital(pandigital);
         }
     }
 }

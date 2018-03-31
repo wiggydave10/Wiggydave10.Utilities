@@ -275,5 +275,23 @@ namespace Wiggydave10.Utilities
             }
             return primes;
         }
+
+
+        public static bool IsPandigital(this string number, int pandigital)
+        {
+            var numbers = Enumerable.Range(1, pandigital);
+
+            var distinctNumbers = number.ToCharArray().Distinct();
+            if (number.Length == pandigital && distinctNumbers.Count() == pandigital)
+            {
+                return numbers.All(x => number.Contains(x.ToString()));
+            }
+            return false;
+        }
+        public static bool IsPandigital(this int number, int pandigital)
+        {
+            var str = number.ToString();
+            return IsPandigital(str, pandigital);
+        }
     }
 }
