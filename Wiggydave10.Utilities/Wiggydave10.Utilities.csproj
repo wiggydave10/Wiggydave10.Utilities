@@ -2,6 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>Matthew Yates (wiggydave10)</Authors>
+    <Company />
+    <Description>A utilities class that contains useful methods and extensions that I use.
+
+A lot of the utilities come from me completing Project Euler, but also general programming.</Description>
+    <PackageProjectUrl>https://github.com/wiggydave10/Wiggydave10.Utilities</PackageProjectUrl>
+    <PackageReleaseNotes>Initial release to Nuget.</PackageReleaseNotes>
   </PropertyGroup>
 
 </Project>
